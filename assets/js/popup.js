@@ -36,32 +36,60 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /**
    * Index LOGIC (Redirect on both buttons)
-   */
-  const IndexRedirect = "https://adorbit.site/";
-
-  document.getElementById("gn-yes").addEventListener("click", () => {
-    if (isIndex) {
-      window.location.href = IndexRedirect;
-    } else {
-      // dex = just close
-      close();
-    }
-  });
-
-  document.getElementById("gn-close").addEventListener("click", () => {
-    if (isIndex) {
-      window.location.href = IndexRedirect;
-    } else {
-      // dex CLOSE BEHAVIOR
-      const target =
-        (document.querySelector('a[href*="terms.html"]') && "terms.html") ||
-        (document.querySelector('a[href*="privacy.html"]') && "privacy.html");
-
-      if (target) {
-        window.location.href = target;
+ 
+  
+  document.addEventListener("DOMContentLoaded", () => {
+ 
+  const yesBtn = document.getElementById("gn-yes");
+  const closeBtn = document.getElementById("gn-close");
+ 
+  const IndexRedirect = "https://google.com/";
+ 
+  // detect index page
+  const isIndex =
+    window.location.pathname === "/" ||
+    window.location.pathname.includes("index");
+ 
+  // custom modal close
+  function closeGate() {
+    document.getElementById("gate")?.classList.remove("show");
+  }
+ 
+  // YES BUTTON
+  if (yesBtn) {
+    yesBtn.addEventListener("click", () => {
+ 
+      if (isIndex) {
+        window.location.href = IndexRedirect;
       } else {
-        close(); // fallback
+        closeGate();
       }
-    }
-  });
+ 
+    });
+  }
+ 
+  // CLOSE BUTTON
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+ 
+      if (isIndex) {
+ 
+        window.location.href = IndexRedirect;
+ 
+      } else {
+ 
+        const target =
+          (document.querySelector('a[href*="terms.html"]') && "terms.html") ||
+          (document.querySelector('a[href*="privacy.html"]') && "privacy.html");
+ 
+        if (target) {
+          window.location.href = target;
+        } else {
+          closeGate();
+        }
+      }
+ 
+    });
+  }
+ 
 });

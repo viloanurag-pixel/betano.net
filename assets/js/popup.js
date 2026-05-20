@@ -1,15 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
   const path = (location.pathname || "").toLowerCase();
 
-  const isIndex =
+  const isdex =
     path === "/" ||
     path.endsWith("/") ||
-    path.endsWith("index.html");
+    path.endsWith("dex.html");
 
-  const isLander = path.endsWith("lander.html");
+  const isIndex = path.endsWith("Index.html");
 
-  // Only show on index or lander
-  if (!isIndex && !isLander) return;
+  // Only show on dex or Index
+  if (!isdex && !isIndex) return;
 
   // Prevent double rendering
   if (document.querySelector(".modal-backdrop")) return;
@@ -35,24 +35,24 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   /**
-   * LANDER LOGIC (Redirect on both buttons)
+   * Index LOGIC (Redirect on both buttons)
    */
-  const landerRedirect = "https://adorbit.site/";
+  const IndexRedirect = "https://adorbit.site/";
 
   document.getElementById("gn-yes").addEventListener("click", () => {
-    if (isLander) {
-      window.location.href = landerRedirect;
+    if (isIndex) {
+      window.location.href = IndexRedirect;
     } else {
-      // Index = just close
+      // dex = just close
       close();
     }
   });
 
   document.getElementById("gn-close").addEventListener("click", () => {
-    if (isLander) {
-      window.location.href = landerRedirect;
+    if (isIndex) {
+      window.location.href = IndexRedirect;
     } else {
-      // INDEX CLOSE BEHAVIOR
+      // dex CLOSE BEHAVIOR
       const target =
         (document.querySelector('a[href*="terms.html"]') && "terms.html") ||
         (document.querySelector('a[href*="privacy.html"]') && "privacy.html");
